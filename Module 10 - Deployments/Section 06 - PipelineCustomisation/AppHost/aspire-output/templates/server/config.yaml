@@ -1,0 +1,11 @@
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "server-config"
+  labels:
+    app.kubernetes.io/name: "apphost"
+    app.kubernetes.io/component: "server"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+data:
+  ACCEPT_EULA: "{{ .Values.config.server.ACCEPT_EULA }}"

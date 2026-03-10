@@ -1,0 +1,43 @@
+parameters:
+  ratingservice:
+    port_http: 8080
+    ratingservice_image: "ratingservice:latest"
+  api:
+    port_http: 8080
+    api_image: "api:latest"
+  frontend:
+    port_http: 8080
+    frontend_image: "frontend:latest"
+  migration:
+    migration_image: "migration:latest"
+secrets:
+  server:
+    MSSQL_SA_PASSWORD: ""
+  cache:
+    REDIS_PASSWORD: ""
+config:
+  server:
+    ACCEPT_EULA: "Y"
+  ratingservice:
+    OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+    ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+    CACHE_HOST: "cache-service"
+    CACHE_PORT: "6379"
+  api:
+    OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+    ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+    PODCASTS_HOST: "server-service"
+    PODCASTS_PORT: "1433"
+    PODCASTS_USERNAME: "sa"
+    PODCASTS_JDBCCONNECTIONSTRING: "jdbc:sqlserver://server-service:1433;databaseName=podcasts;trustServerCertificate=true"
+    PODCASTS_DATABASENAME: "podcasts"
+  frontend:
+    OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+    ASPNETCORE_FORWARDEDHEADERS_ENABLED: "true"
+  migration:
+    OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "in_memory"
+    PODCASTS_HOST: "server-service"
+    PODCASTS_PORT: "1433"
+    PODCASTS_USERNAME: "sa"
+    PODCASTS_JDBCCONNECTIONSTRING: "jdbc:sqlserver://server-service:1433;databaseName=podcasts;trustServerCertificate=true"
+    PODCASTS_DATABASENAME: "podcasts"

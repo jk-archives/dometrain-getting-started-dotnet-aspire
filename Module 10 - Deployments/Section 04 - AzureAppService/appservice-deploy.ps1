@@ -1,0 +1,1 @@
+aspire deploy --clear-cache

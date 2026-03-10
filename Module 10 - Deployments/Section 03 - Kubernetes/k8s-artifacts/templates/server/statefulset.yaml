@@ -1,0 +1,41 @@
+---
+apiVersion: "apps/v1"
+kind: "StatefulSet"
+metadata:
+  name: "server-statefulset"
+  labels:
+    app.kubernetes.io/name: "my-aspire-app"
+    app.kubernetes.io/component: "server"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+spec:
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: "my-aspire-app"
+        app.kubernetes.io/component: "server"
+        app.kubernetes.io/instance: "{{ .Release.Name }}"
+    spec:
+      containers:
+        - image: "mcr.microsoft.com/mssql/server:2022-latest"
+          name: "server"
+          envFrom:
+            - configMapRef:
+                name: "server-config"
+            - secretRef:
+                name: "server-secrets"
+          ports:
+            - name: "tcp"
+              protocol: "TCP"
+              containerPort: 1433
+          imagePullPolicy: "IfNotPresent"
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "my-aspire-app"
+      app.kubernetes.io/component: "server"
+      app.kubernetes.io/instance: "{{ .Release.Name }}"
+  replicas: 1
+  persistentVolumeClaimRetentionPolicy: {}
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 0
+    type: "RollingUpdate"

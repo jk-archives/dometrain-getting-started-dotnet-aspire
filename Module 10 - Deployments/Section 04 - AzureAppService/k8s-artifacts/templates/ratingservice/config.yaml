@@ -1,0 +1,15 @@
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "ratingservice-config"
+  labels:
+    app.kubernetes.io/name: "my-aspire-app"
+    app.kubernetes.io/component: "ratingservice"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+data:
+  OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "{{ .Values.config.ratingservice.OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY }}"
+  ASPNETCORE_FORWARDEDHEADERS_ENABLED: "{{ .Values.config.ratingservice.ASPNETCORE_FORWARDEDHEADERS_ENABLED }}"
+  HTTP_PORTS: "{{ .Values.parameters.ratingservice.port_http }}"
+  CACHE_HOST: "{{ .Values.config.ratingservice.CACHE_HOST }}"
+  CACHE_PORT: "{{ .Values.config.ratingservice.CACHE_PORT }}"

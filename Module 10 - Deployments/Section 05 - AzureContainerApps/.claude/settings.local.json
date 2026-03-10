@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find \"/c/Code/Dometrain/getting-started-dotnet-aspire/Module 10 - Deployments\" -type f -name \"*.cs\" | xargs grep -l \"Azure\" | head -10)",
+      "Bash(grep -r \"Container\\\\|ACA\" \"/c/Code/Dometrain/getting-started-dotnet-aspire\" --include=\"*.cs\" --include=\"*.csproj\" --include=\"*.md\" 2>/dev/null | grep -i \"app\\\\|container\" | head -20)",
+      "Bash(grep -i \"containerapp\" \"/c/Code/Dometrain/getting-started-dotnet-aspire/Module 10 - Deployments\"/* 2>/dev/null)",
+      "Bash(cp -r \"/c/Code/Dometrain/getting-started-dotnet-aspire/Module 10 - Deployments/Section 04 - AzureAppService\" \"/c/Code/Dometrain/getting-started-dotnet-aspire/Module 10 - Deployments/Section 05 - AzureContainerApps\")"
+    ]
+  }
+}

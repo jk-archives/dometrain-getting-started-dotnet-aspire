@@ -24,7 +24,7 @@ x => x.DisableTracing = true);
 
 builder.Services.AddOpenTelemetry().WithTracing(tracerProviderBuilder =>
 {
-    tracerProviderBuilder.AddSqlClientInstrumentation(x => x.SetDbStatementForText = true);
+    tracerProviderBuilder.AddSqlClientInstrumentation();
 });
 
 var app = builder.Build();

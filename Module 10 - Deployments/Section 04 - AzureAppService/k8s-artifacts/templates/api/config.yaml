@@ -1,0 +1,22 @@
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "api-config"
+  labels:
+    app.kubernetes.io/name: "my-aspire-app"
+    app.kubernetes.io/component: "api"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+data:
+  OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "{{ .Values.config.api.OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY }}"
+  ASPNETCORE_FORWARDEDHEADERS_ENABLED: "{{ .Values.config.api.ASPNETCORE_FORWARDEDHEADERS_ENABLED }}"
+  HTTP_PORTS: "{{ .Values.parameters.api.port_http }}"
+  PODCASTS_HOST: "{{ .Values.config.api.PODCASTS_HOST }}"
+  PODCASTS_PORT: "{{ .Values.config.api.PODCASTS_PORT }}"
+  PODCASTS_USERNAME: "{{ .Values.config.api.PODCASTS_USERNAME }}"
+  PODCASTS_JDBCCONNECTIONSTRING: "{{ .Values.config.api.PODCASTS_JDBCCONNECTIONSTRING }}"
+  PODCASTS_DATABASENAME: "{{ .Values.config.api.PODCASTS_DATABASENAME }}"
+  RATINGSERVICE_HTTP: "http://ratingservice-service:{{ .Values.parameters.ratingservice.port_http }}"
+  services__ratingservice__http__0: "http://ratingservice-service:{{ .Values.parameters.ratingservice.port_http }}"
+  RATINGSERVICE_HTTPS: "https://ratingservice-service:{{ .Values.parameters.ratingservice.port_http }}"
+  services__ratingservice__https__0: "https://ratingservice-service:{{ .Values.parameters.ratingservice.port_http }}"

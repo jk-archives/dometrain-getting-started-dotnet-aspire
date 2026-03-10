@@ -1,0 +1,31 @@
+﻿<div>
+    @for (var i = 1; i <= 5; i++)
+    {
+        var thisVal = i;
+        <span style="cursor:pointer; font-size: 24px; margin-right: 4px;"
+              @onclick="@(() => OnStarClicked(thisVal))">
+            @StarCharacter(i)
+        </span>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public int Value { get; set; }
+
+    // Parent can handle changes with this callback
+    [Parameter]
+    public EventCallback<int> OnRatingSelected { get; set; }
+
+    // When a star is clicked, update our local rating and
+    // notify the parent so it can handle the "submit" logic (e.g. saving or alert).
+    private async Task OnStarClicked(int selectedValue)
+    {
+        Value = selectedValue;
+        await OnRatingSelected.InvokeAsync(selectedValue);
+    }
+
+    // Helper to show filled vs. outline stars
+    private string StarCharacter(int index)
+        => index <= Value ? "★" : "☆";
+}

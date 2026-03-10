@@ -1,1 +1,0 @@
-The `NodeFrontend-earlierversion` folder is from when I tried a simpler prompt before recording. I thought I'd include both versions. That version created a separate html file for the view, which is better. In hindsight, I wish in the version I recorded, that I'd spotted that it did the HTML inline in the Javascript, and had prompted it to move it to a separate HTML file.

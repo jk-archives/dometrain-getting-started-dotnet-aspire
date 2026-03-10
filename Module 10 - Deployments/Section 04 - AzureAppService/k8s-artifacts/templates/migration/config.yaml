@@ -1,0 +1,16 @@
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "migration-config"
+  labels:
+    app.kubernetes.io/name: "my-aspire-app"
+    app.kubernetes.io/component: "migration"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+data:
+  OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY: "{{ .Values.config.migration.OTEL_DOTNET_EXPERIMENTAL_OTLP_RETRY }}"
+  PODCASTS_HOST: "{{ .Values.config.migration.PODCASTS_HOST }}"
+  PODCASTS_PORT: "{{ .Values.config.migration.PODCASTS_PORT }}"
+  PODCASTS_USERNAME: "{{ .Values.config.migration.PODCASTS_USERNAME }}"
+  PODCASTS_JDBCCONNECTIONSTRING: "{{ .Values.config.migration.PODCASTS_JDBCCONNECTIONSTRING }}"
+  PODCASTS_DATABASENAME: "{{ .Values.config.migration.PODCASTS_DATABASENAME }}"
